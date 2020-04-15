@@ -350,12 +350,6 @@ variable "performance_insights_retention_period" {
   default     = 7
 }
 
-variable "max_allocated_storage" {
-  description = "Specifies the value for Storage Autoscaling"
-  type        = number
-  default     = 0
-}
-
 variable "ca_cert_identifier" {
   description = "Specifies the identifier of the CA certificate for the DB instance"
   type        = string
