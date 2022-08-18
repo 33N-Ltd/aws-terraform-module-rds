@@ -16,7 +16,7 @@ variable "allocated_storage" {
 
 variable "max_allocated_storage" {
   description = "The maximum allocated storage in gigabytes; If larger than allocated storage, automatically creates storage autoscaling"
-  default     = 0
+  default = 0
 }
 
 variable "storage_type" {
@@ -40,7 +40,7 @@ variable "kms_key_id" {
 variable "replicate_source_db" {
   description = "Specifies that this resource is a Replicate database, and to use this value as the source database. This correlates to the identifier of another Amazon RDS Database to replicate."
   type        = string
-  default     = null
+  default     = ""
 }
 
 variable "snapshot_identifier" {
