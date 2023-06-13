@@ -67,7 +67,7 @@ module "db_instance" {
   kms_key_id        = var.kms_key_id
   license_model     = var.license_model
 
-  db_name                                = var.name
+  name                                = var.name
   username                            = var.username
   password                            = var.password
   port                                = var.port
