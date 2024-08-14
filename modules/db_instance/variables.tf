@@ -184,7 +184,7 @@ variable "auto_minor_version_upgrade" {
 variable "apply_immediately" {
   description = "Specifies whether any database modifications are applied immediately, or during the next maintenance window"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "maintenance_window" {
