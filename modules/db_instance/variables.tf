@@ -28,7 +28,7 @@ variable "storage_type" {
 variable "storage_encrypted" {
   description = "Specifies whether the DB instance is encrypted"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "kms_key_id" {
@@ -76,7 +76,7 @@ variable "instance_class" {
   type        = string
 }
 
-variable "name" {
+variable "db_name" {
   description = "The DB name to create. If omitted, no database is created initially"
   type        = string
   default     = ""
@@ -88,8 +88,9 @@ variable "username" {
 }
 
 variable "password" {
-  description = "Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file"
+  description = "Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Not required if manage_master_user_password is true"
   type        = string
+  default     = null
 }
 
 variable "port" {
@@ -277,4 +278,16 @@ variable "ca_cert_identifier" {
   description = "Specifies the identifier of the CA certificate for the DB instance"
   type        = string
   default     = "rds-ca-rsa2048-g1"
+}
+
+variable "manage_master_user_password" {
+  description = "Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if password is provided"
+  type        = bool
+  default     = false
+}
+
+variable "storage_throughput" {
+  description = "Storage throughput value for the DB instance. Only applicable for gp3 storage type"
+  type        = number
+  default     = null
 }
