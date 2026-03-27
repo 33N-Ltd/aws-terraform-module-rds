@@ -54,7 +54,7 @@ resource "aws_db_instance" "this" {
   db_name                             = var.db_name
   username                            = var.username
   password                            = var.manage_master_user_password ? null : var.password
-  manage_master_user_password         = var.manage_master_user_password
+  manage_master_user_password         = var.manage_master_user_password ? true : null
   port                                = var.port
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
 
@@ -129,7 +129,7 @@ resource "aws_db_instance" "this_mssql" {
   db_name                             = var.db_name
   username                            = var.username
   password                            = var.manage_master_user_password ? null : var.password
-  manage_master_user_password         = var.manage_master_user_password
+  manage_master_user_password         = var.manage_master_user_password ? true : null
   port                                = var.port
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
 
