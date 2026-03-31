@@ -14,9 +14,9 @@ variable "max_allocated_storage" {
 }
 
 variable "storage_type" {
-  description = "One of 'standard' (magnetic), 'gp2' (general purpose SSD), or 'io1' (provisioned IOPS SSD). The default is 'io1' if iops is specified, 'standard' if not. Note that this behaviour is different from the AWS web console, where the default is 'gp2'."
+  description = "One of 'standard' (magnetic), 'gp2' (general purpose SSD), 'gp3' (general purpose SSD), or 'io1' (provisioned IOPS SSD)."
   type        = string
-  default     = "gp2"
+  default     = "gp3"
 }
 
 variable "storage_encrypted" {
