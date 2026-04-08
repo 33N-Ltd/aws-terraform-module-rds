@@ -62,15 +62,17 @@ module "db_instance" {
   engine_version    = var.engine_version
   instance_class    = var.instance_class
   allocated_storage = var.allocated_storage
-  storage_type      = var.storage_type
-  storage_encrypted = var.storage_encrypted
-  kms_key_id        = var.kms_key_id
-  license_model     = var.license_model
+  storage_type       = var.storage_type
+  storage_encrypted  = var.storage_encrypted
+  storage_throughput = var.storage_throughput
+  kms_key_id         = var.kms_key_id
+  license_model      = var.license_model
 
-  name                                = var.name
+  db_name                             = var.db_name
   username                            = var.username
   password                            = var.password
   port                                = var.port
+  manage_master_user_password         = var.manage_master_user_password
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
 
   replicate_source_db = var.replicate_source_db

@@ -45,14 +45,16 @@ resource "aws_db_instance" "this" {
   engine_version    = var.engine_version
   instance_class    = var.instance_class
   allocated_storage = var.allocated_storage
-  storage_type      = var.storage_type
-  storage_encrypted = var.storage_encrypted
-  kms_key_id        = var.kms_key_id
-  license_model     = var.license_model
+  storage_type       = var.storage_type
+  storage_encrypted  = var.storage_encrypted
+  storage_throughput = var.storage_throughput
+  kms_key_id         = var.kms_key_id
+  license_model      = var.license_model
 
-  name                                = var.name
+  db_name                             = var.db_name
   username                            = var.username
-  password                            = var.password
+  password                            = var.manage_master_user_password ? null : var.password
+  manage_master_user_password         = var.manage_master_user_password ? true : null
   port                                = var.port
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
 
@@ -118,14 +120,16 @@ resource "aws_db_instance" "this_mssql" {
   engine_version    = var.engine_version
   instance_class    = var.instance_class
   allocated_storage = var.allocated_storage
-  storage_type      = var.storage_type
-  storage_encrypted = var.storage_encrypted
-  kms_key_id        = var.kms_key_id
-  license_model     = var.license_model
+  storage_type       = var.storage_type
+  storage_encrypted  = var.storage_encrypted
+  storage_throughput = var.storage_throughput
+  kms_key_id         = var.kms_key_id
+  license_model      = var.license_model
 
-  name                                = var.name
+  db_name                             = var.db_name
   username                            = var.username
-  password                            = var.password
+  password                            = var.manage_master_user_password ? null : var.password
+  manage_master_user_password         = var.manage_master_user_password ? true : null
   port                                = var.port
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
 

@@ -14,15 +14,15 @@ variable "max_allocated_storage" {
 }
 
 variable "storage_type" {
-  description = "One of 'standard' (magnetic), 'gp2' (general purpose SSD), or 'io1' (provisioned IOPS SSD). The default is 'io1' if iops is specified, 'standard' if not. Note that this behaviour is different from the AWS web console, where the default is 'gp2'."
+  description = "One of 'standard' (magnetic), 'gp2' (general purpose SSD), 'gp3' (general purpose SSD), or 'io1' (provisioned IOPS SSD)."
   type        = string
-  default     = "gp2"
+  default     = "gp3"
 }
 
 variable "storage_encrypted" {
   description = "Specifies whether the DB instance is encrypted"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "kms_key_id" {
@@ -76,7 +76,7 @@ variable "instance_class" {
   type        = string
 }
 
-variable "name" {
+variable "db_name" {
   description = "The DB name to create. If omitted, no database is created initially"
   type        = string
   default     = ""
@@ -88,8 +88,9 @@ variable "username" {
 }
 
 variable "password" {
-  description = "Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file"
+  description = "Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Not required if manage_master_user_password is true"
   type        = string
+  default     = null
 }
 
 variable "port" {
@@ -142,7 +143,7 @@ variable "multi_az" {
 variable "iops" {
   description = "The amount of provisioned IOPS. Setting this implies a storage_type of 'io1'"
   type        = number
-  default     = 0
+  default     = null
 }
 
 variable "publicly_accessible" {
@@ -178,7 +179,7 @@ variable "create_monitoring_role" {
 variable "allow_major_version_upgrade" {
   description = "Indicates that major version upgrades are allowed. Changing this parameter does not result in an outage and the change is asynchronously applied as soon as possible"
   type        = bool
-  default     = false
+  default     = true # Temporarily enabled for MySQL 8.0 -> 8.4 upgrade, revert to false after
 }
 
 variable "auto_minor_version_upgrade" {
@@ -354,4 +355,16 @@ variable "ca_cert_identifier" {
   description = "Specifies the identifier of the CA certificate for the DB instance"
   type        = string
   default     = "rds-ca-rsa2048-g1"
+}
+
+variable "manage_master_user_password" {
+  description = "Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if password is provided"
+  type        = bool
+  default     = false
+}
+
+variable "storage_throughput" {
+  description = "Storage throughput value for the DB instance. Only applicable for gp3 storage type"
+  type        = number
+  default     = null
 }
