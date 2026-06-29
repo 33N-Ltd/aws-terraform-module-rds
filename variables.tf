@@ -179,7 +179,7 @@ variable "create_monitoring_role" {
 variable "allow_major_version_upgrade" {
   description = "Indicates that major version upgrades are allowed. Changing this parameter does not result in an outage and the change is asynchronously applied as soon as possible"
   type        = bool
-  default     = true # Temporarily enabled for MySQL 8.0 -> 8.4 upgrade, revert to false after
+  default     = false
 }
 
 variable "auto_minor_version_upgrade" {
