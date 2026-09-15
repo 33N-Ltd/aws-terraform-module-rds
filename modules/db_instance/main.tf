@@ -60,7 +60,7 @@ resource "aws_db_instance" "this" {
 
   replicate_source_db = var.replicate_source_db
 
-  snapshot_identifier = var.snapshot_identifier
+  snapshot_identifier = var.snapshot_identifier != "" ? var.snapshot_identifier : null
 
   vpc_security_group_ids = var.vpc_security_group_ids
   db_subnet_group_name   = var.db_subnet_group_name
@@ -135,7 +135,7 @@ resource "aws_db_instance" "this_mssql" {
 
   replicate_source_db = var.replicate_source_db
 
-  snapshot_identifier = var.snapshot_identifier
+  snapshot_identifier = var.snapshot_identifier != "" ? var.snapshot_identifier : null
 
   vpc_security_group_ids = var.vpc_security_group_ids
   db_subnet_group_name   = var.db_subnet_group_name
