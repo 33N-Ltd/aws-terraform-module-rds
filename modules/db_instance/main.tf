@@ -58,9 +58,9 @@ resource "aws_db_instance" "this" {
   port                                = var.port
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
 
-  replicate_source_db = var.replicate_source_db
+  replicate_source_db = var.replicate_source_db != "" ? var.replicate_source_db : null
 
-  snapshot_identifier = var.snapshot_identifier
+  snapshot_identifier = var.snapshot_identifier != "" ? var.snapshot_identifier : null
 
   vpc_security_group_ids = var.vpc_security_group_ids
   db_subnet_group_name   = var.db_subnet_group_name
@@ -89,7 +89,7 @@ resource "aws_db_instance" "this" {
   backup_retention_period = var.backup_retention_period
   backup_window           = var.backup_window
 
-  character_set_name = var.character_set_name
+  character_set_name = var.character_set_name != "" ? var.character_set_name : null
 
   ca_cert_identifier = var.ca_cert_identifier
 
@@ -133,9 +133,9 @@ resource "aws_db_instance" "this_mssql" {
   port                                = var.port
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
 
-  replicate_source_db = var.replicate_source_db
+  replicate_source_db = var.replicate_source_db != "" ? var.replicate_source_db : null
 
-  snapshot_identifier = var.snapshot_identifier
+  snapshot_identifier = var.snapshot_identifier != "" ? var.snapshot_identifier : null
 
   vpc_security_group_ids = var.vpc_security_group_ids
   db_subnet_group_name   = var.db_subnet_group_name
