@@ -89,7 +89,7 @@ resource "aws_db_instance" "this" {
   backup_retention_period = var.backup_retention_period
   backup_window           = var.backup_window
 
-  character_set_name = var.character_set_name
+  character_set_name = var.character_set_name != "" ? var.character_set_name : null
 
   ca_cert_identifier = var.ca_cert_identifier
 

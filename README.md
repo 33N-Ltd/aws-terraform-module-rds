@@ -16,18 +16,18 @@ Root module calls these modules which can also be used separately to create inde
 * [db_parameter_group](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_parameter_group) - creates RDS DB parameter group
 * [db_option_group](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_option_group) - creates RDS DB option group
 
-## Terraform versions
+## Terraform and provider versions
 
-Terraform 0.12. Pin module version to `~> v2.0`. Submit pull-requests to `master` branch.
+Terraform 1.0 or later, AWS provider 4.62 or later. Pin to `?ref=v2.0.0` or later and submit
+pull-requests to `master`.
 
-Terraform 0.11. Pin module version to `~> v1.0`. Submit pull-requests to `terraform011` branch.
+The `v1.x` tags are Terraform 0.11 syntax and will not parse under Terraform 1.x. Do not pin to them.
 
 ## Usage
 
 ```hcl
 module "db" {
-  source  = "terraform-aws-modules/rds/aws"
-  version = "~> 2.0"
+  source = "git::ssh://git@github.com/33N-Ltd/aws-terraform-module-rds.git?ref=v2.0.0"
 
   identifier = "demodb"
 
@@ -36,8 +36,7 @@ module "db" {
   instance_class    = "db.t2.large"
   allocated_storage = 5
 
-  db_name     = "demodb"
-  name     = "demodb" #This var is deprecated use db_name
+  db_name  = "demodb"
   username = "user"
   password = "YourPwdShouldBeLongAndSecure!"
   port     = "3306"
@@ -152,7 +151,7 @@ No provider.
 | backup\_retention\_period                | The days to retain backups for                                                                                                                                                                                                                                           | `number` | `1` | no |
 | backup\_window                           | The daily time range (in UTC) during which automated backups are created if they are enabled. Example: '09:46-10:16'. Must not overlap with maintenance\_window                                                                                                          | `string` | n/a | yes |
 | ca\_cert\_identifier                     | Specifies the identifier of the CA certificate for the DB instance                                                                                                                                                                                                       | `string` | `"rds-ca-rsa2048-g1"` | no |
-| character\_set\_name                     | (Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS for more information                                                                                              | `string` | `""` | no |
+| character\_set\_name                     | (Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. Leave empty on other engines: AWS provider 6.x rejects it alongside snapshot\_identifier, so the module omits the argument entirely when this is empty               | `string` | `""` | no |
 | copy\_tags\_to\_snapshot                 | On delete, copy all Instance tags to the final snapshot (if final\_snapshot\_identifier is specified)                                                                                                                                                                    | `bool` | `false` | no |
 | create\_db\_instance                     | Whether to create a database instance                                                                                                                                                                                                                                    | `bool` | `true` | no |
 | create\_db\_option\_group                | (Optional) Create a database option group                                                                                                                                                                                                                                | `bool` | `true` | no |

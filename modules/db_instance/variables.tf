@@ -235,7 +235,7 @@ variable "timezone" {
 }
 
 variable "character_set_name" {
-  description = "(Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS for more information"
+  description = "(Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. Leave empty on other engines: AWS provider 6.x rejects it alongside snapshot_identifier, so the module omits the argument entirely when this is empty"
   type        = string
   default     = ""
 }
